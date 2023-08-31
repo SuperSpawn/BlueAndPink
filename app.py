@@ -47,9 +47,6 @@ if st.session_state['playing']:
         st.image('./assets/pink.jpg')
     st.write(scene['text'])
 
-    st.session_state['text_speech'].say(scene['text'])
-    st.session_state['text_speech'].runAndWait()
-
     time.sleep(scene['length'])
     st.session_state['index'] += 1
     if st.session_state['index'] >= len(st.session_state['script']):
