@@ -6,6 +6,7 @@ import streamlit as st
 from reset import reset
 from llm import create_episode
 
+
 # config API stuff
 try:
     load_dotenv('.env')
@@ -45,6 +46,9 @@ if st.session_state['playing']:
     if "P" in scene['character']:
         st.image('./assets/pink.jpg')
     st.write(scene['text'])
+
+    st.session_state['text_speech'].say(scene['text'])
+    st.session_state['text_speech'].runAndWait()
 
     time.sleep(scene['length'])
     st.session_state['index'] += 1
