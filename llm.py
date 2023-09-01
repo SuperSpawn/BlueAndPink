@@ -2,7 +2,12 @@ import os
 from langchain import PromptTemplate, OpenAI, LLMChain
 from dotenv import load_dotenv
 
-os.environ['OPENAI_API_KEY'] = "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"
+
+load_dotenv('.env')
+
+api_key = os.getenv('OPENAI_API_KEY')
+if api_key:
+    os.environ['OPENAI_API_KEY'] = api_key
 
 
 prompt_template = """
