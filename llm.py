@@ -1,6 +1,5 @@
 from langchain import PromptTemplate, OpenAI, LLMChain
 from parse import parse_text_string
-import streamlit as st
 
 
 prompt_template = """
@@ -28,7 +27,8 @@ llm_chain = LLMChain(
 
 def create_episode(user_request):
     response = llm_chain(user_request)['text']
-    st.session_state['script'] = parse_text_string(response)
+    with open("script.txt", "w") as file:
+        file.write(response)
 
 
 __all__ = ['create_episode']

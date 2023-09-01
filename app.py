@@ -1,54 +1,99 @@
-import os
-import time
-from dotenv import load_dotenv
-import streamlit as st
-
-from reset import reset
-from llm import create_episode
+import pygame
+import sys
+import json
+import pyttsx3
+from parse import parse_text_string
 
 
-# config API stuff
-try:
-    load_dotenv('.env')
-    api_key = os.getenv("OPENAI_API_KEY")
+# initialize text to speech
+text_speech = pyttsx3.init()
 
-    if api_key:
-        os.environ["OPENAI_API_KEY"] = api_key
-    else:
-        print("API key not found in environment variable or .env file.")
-except FileNotFoundError:
-    api_key = os.getenv("OPENAI_API_KEY")
 
-    if api_key:
-        os.environ["OPENAI_API_KEY"] = api_key
-    else:
-        print("API key not found in environment variable or .env file.")
+# Initialize pygame
+pygame.init()
 
-reset()
+# Window dimensions
+window_width = 800
+window_height = 600
 
-st.title("Blue & Pink")
+# Create the window
+window = pygame.display.set_mode((window_width, window_height))
+pygame.display.set_caption("Image Display")
 
-with st.form("create episode"):
-    user_request = st.text_area("Special Request:")
-    if st.form_submit_button("Create episode"):
-        create_episode(user_request)
+# Load images
+background_image = pygame.image.load("./assets/windows.jpg")
+image1 = pygame.image.load("./assets/blue.jpg")
+image2 = pygame.image.load("./assets/pink.jpg")
 
-st.divider()
+# Resize images to fit the screen
+background_image = pygame.transform.scale(
+    background_image, (window_width, window_height))
+image1 = pygame.transform.scale(image1, (window_width // 2, window_height))
+image2 = pygame.transform.scale(image2, (window_width // 2, window_height))
 
-if st.button("Play Episode", disabled=st.session_state['playing']):
-    st.session_state['playing'] = True
-    st.session_state['index'] = 0
+# Load font for text
+font = pygame.font.Font(None, 36)
 
-if st.session_state['playing']:
-    scene = st.session_state['script'][st.session_state['index']]
-    if "B" in scene['character']:
-        st.image('./assets/blue.jpg')
-    if "P" in scene['character']:
-        st.image('./assets/pink.jpg')
-    st.write(scene['text'])
+# Load JSON array
+with open('script.txt', 'r') as f:
+    script_str = f.read()
+script = parse_text_string(script_str)
 
-    time.sleep(scene['length'])
-    st.session_state['index'] += 1
-    if st.session_state['index'] >= len(st.session_state['script']):
-        st.session_state['playing'] = False
-    st.experimental_rerun()
+
+# Initialize variables for loop control
+index = 0
+next_time = 0
+
+# Main loop
+running = True
+while running:
+    current_time = pygame.time.get_ticks()  # Get current time in milliseconds
+
+    if index == len(script):
+        running = False
+
+    # Check if it's time to switch to the next object in the array
+    if current_time >= next_time and index < len(script):
+        # Load properties from the current object in JSON array
+        text = script[index]['text']
+        blue = "B" in script[index]['character']
+        pink = "P" in script[index]['character']
+        length = script[index]['length']
+
+        # Create text surface
+        text_surface = font.render(text, True, (0, 0, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.center = (window_width // 2, window_height - 30)
+
+        # Update next_time for the next object in the JSON array
+        next_time = current_time + length * 1000  # Convert to milliseconds
+        index += 1
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Clear the screen
+    window.fill((0, 0, 0))
+
+    # Draw the background image
+    window.blit(background_image, (0, 0))
+
+    # Draw images based on JSON object properties
+    if blue:
+        window.blit(image1, (0, 0))
+    if pink:
+        window.blit(image2, (window_width // 2, 0))
+
+    # Draw text
+    window.blit(text_surface, text_rect)
+
+    # Update the display
+    pygame.display.flip()
+
+    text_speech.say(text)
+    text_speech.runAndWait()
+
+# Quit pygame
+pygame.quit()
+sys.exit()
