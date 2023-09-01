@@ -1,13 +1,8 @@
-import os
 from langchain import PromptTemplate, OpenAI, LLMChain
 from dotenv import load_dotenv
 
 
-load_dotenv('.env')
-
-api_key = os.getenv('OPENAI_API_KEY')
-if api_key:
-    os.environ['OPENAI_API_KEY'] = api_key
+load_dotenv()
 
 
 prompt_template = """
@@ -40,7 +35,7 @@ def create_episode(user_request):
 
 
 create_episode(
-    "blue and pink talk about their favorite anime, at least 5 scenes long")
+    "blue and pink want to cook something for dinner but keep arguing about crabs")
 
 
 __all__ = ['create_episode']
