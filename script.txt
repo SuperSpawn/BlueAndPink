@@ -1,10 +1,21 @@
-B 5 Blue: I love watching Naruto!
-P 5 Pink: I'm more of a One Piece fan myself.
-B 5 Blue: I think Naruto has the best fight scenes.
-P 5 Pink: One Piece has the best characters.
-B 5 Blue: I like the way Naruto's story develops.
-P 5 Pink: One Piece has the best plot twists.
-B 5 Blue: Naruto has the best soundtrack.
-P 5 Pink: One Piece has the best animation.
-B 5 Blue: I think Naruto has the best overall package.
-P 5 Pink: I think One Piece is the best anime ever!
+
+B: Let's go to that Italian restaurant. 
+B,P: *arrive at restaurant* 
+P: Wow, this place looks amazing! 
+B: Yeah, let's see what they have on the menu. 
+B,P: *look at menu* 
+P: Hmm, I'm not sure what to get. 
+B: How about the lasagna? 
+P: That sounds good, let's get it. 
+B,P: *order lasagna* 
+B: So, I heard a funny story the other day. 
+P: Oh yeah? What was it? 
+B: Well, there was this guy who was trying to get a job at a bank, but he was so nervous that he accidentally put his resume in the shredder. 
+P: That's hilarious! 
+B,P: *laugh* 
+P: So, what else do you want to get? 
+B: How about the garlic bread? 
+P: Sure, that sounds good. 
+B,P: *order garlic bread* 
+B: So, what do you want to drink? 
+P: I'll have a glass

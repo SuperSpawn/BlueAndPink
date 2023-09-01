@@ -13,25 +13,15 @@ def parse_text_string(text_string):
             continue
 
         # Split the line based on spaces
-        parts = line.split(' ', 2)  # Maximum of 2 splits
-
-        if len(parts) != 3:
-            print(f"Skipping invalid line: {line}")
-            continue
+        parts = line.split(' ', 1)  # maximum twice
 
         # Extract the character, length, and text from the line
         character = parts[0]
-        try:
-            length = int(parts[1])
-        except ValueError:
-            print(f"Skipping invalid line: {line} (Invalid length)")
-            continue
-        text = parts[2]
+        text = parts[1]
 
         # Create an object and append to the array
         obj = {
             'character': character,
-            'length': length,
             'text': text
         }
         object_array.append(obj)

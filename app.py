@@ -46,15 +46,12 @@ next_time = 0
 # Main loop
 running = True
 while running:
-    current_time = pygame.time.get_ticks()  # Get current time in milliseconds
-
     # Check if it's time to switch to the next object in the array
     if index < len(script):
         # Load properties from the current object in JSON array
         text = script[index]['text']
         blue = "B" in script[index]['character']
         pink = "P" in script[index]['character']
-        length = script[index]['length']
 
         # Create text surface
         text_surface = font.render(text, True, (0, 0, 0))

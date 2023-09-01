@@ -1,8 +1,12 @@
+import os
 from langchain import PromptTemplate, OpenAI, LLMChain
 from dotenv import load_dotenv
 
 
 load_dotenv()
+api_key = os.getenv('OPENAI_API_KEY')
+if api_key:
+    print("Successfully loaded OpenAI key")
 
 
 prompt_template = """
@@ -12,9 +16,8 @@ Each scene has the following variables:
 - text: the text to be displayed on screen
 - blue: boolean value to represent whether or not Blue is in the scene
 - pink: boolean value to represent whether or not Pink is in the scene
-- length: length of the scene in seconds
 Scene format: string in the following order:
-{{characters in the scene(last one is the one who speaks)(only write first letter in name)}} {{length in seconds}} {{text}}
+{{characters in the scene(last one is the one who speaks)(only write first letter in name)}} {{text}}
 
 Given the following user request, return a series of formatted scenes seperated by according to user request.
 User request: {user_request}
@@ -35,7 +38,7 @@ def create_episode(user_request):
 
 
 create_episode(
-    "blue and pink want to cook something for dinner but keep arguing about crabs")
+    "blue and pink are in an italian restaurant and decide what to eat, they also talk about a funny story, at lest 15 scenes long")
 
 
 __all__ = ['create_episode']
