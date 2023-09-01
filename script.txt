@@ -1,9 +1,10 @@
-B 1 Blue: "Let's go on a picnic!"
-P 1 Pink: "That sounds like a great idea!"
-B 1 Blue: "Let's go!"
-B 1 Blue: "I'll grab the picnic basket!"
-P 1 Pink: "I'll get the blanket!"
-B 1 Blue: "Let's go!"
-B 1 Blue: "We're here!"
-P 1 Pink: "This is a great spot!"
-B 1 Blue: "Let's set up!"
+B 5 Blue: I love watching Naruto!
+P 5 Pink: I'm more of a One Piece fan myself.
+B 5 Blue: I think Naruto has the best fight scenes.
+P 5 Pink: One Piece has the best characters.
+B 5 Blue: I like the way Naruto's story develops.
+P 5 Pink: One Piece has the best plot twists.
+B 5 Blue: Naruto has the best soundtrack.
+P 5 Pink: One Piece has the best animation.
+B 5 Blue: I think Naruto has the best overall package.
+P 5 Pink: I think One Piece is the best anime ever!

@@ -1,5 +1,8 @@
+import os
 from langchain import PromptTemplate, OpenAI, LLMChain
-from parse import parse_text_string
+from dotenv import load_dotenv
+
+os.environ['OPENAI_API_KEY'] = "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"
 
 
 prompt_template = """
@@ -29,6 +32,10 @@ def create_episode(user_request):
     response = llm_chain(user_request)['text']
     with open("script.txt", "w") as file:
         file.write(response)
+
+
+create_episode(
+    "blue and pink talk about their favorite anime, at least 5 scenes long")
 
 
 __all__ = ['create_episode']

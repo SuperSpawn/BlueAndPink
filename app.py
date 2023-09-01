@@ -49,11 +49,8 @@ running = True
 while running:
     current_time = pygame.time.get_ticks()  # Get current time in milliseconds
 
-    if index == len(script):
-        running = False
-
     # Check if it's time to switch to the next object in the array
-    if current_time >= next_time and index < len(script):
+    if index < len(script):
         # Load properties from the current object in JSON array
         text = script[index]['text']
         blue = "B" in script[index]['character']
@@ -65,9 +62,10 @@ while running:
         text_rect = text_surface.get_rect()
         text_rect.center = (window_width // 2, window_height - 30)
 
-        # Update next_time for the next object in the JSON array
-        next_time = current_time + length * 1000  # Convert to milliseconds
         index += 1
+    else:
+        running = False
+        continue
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
