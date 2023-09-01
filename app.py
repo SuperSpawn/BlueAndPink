@@ -1,6 +1,5 @@
 import pygame
 import sys
-import json
 import pyttsx3
 from parse import parse_text_string
 
